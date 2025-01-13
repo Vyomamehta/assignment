@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            margin-top: 70px; /* Adjusted for navbar height */
+            gap: 15px;
+            padding: 10px;
+            justify-content: space-between;
+        }
+
+        .left-menu {
+            width: 20%;
+            background-color: #f8d7da;
+            padding: 15px;
+            box-sizing: border-box;
+            border-right: 2px solid #ccc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 200px; /* Prevent it from shrinking */
+            display: block; /* Show by default */
+        }
+
+        .left-menu.collapsed {
+            display: none; /* Hide when collapsed */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            min-width: 400px; /* Prevent shrinking */
+        }
+
+        .right-panel {
+            width: 20%;
+            background-color: #d4edda;
+            padding: 15px;
+            box-sizing: border-box;
+            border-left: 2px solid #ccc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 200px; /* Prevent it from shrinking */
+        }
+
+        .footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            margin-top: 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sections */
+        .section h2 {
+            color: #007BFF;
+        }
+
+        .section p {
+            line-height: 1.6;
+        }
+
+        /* Button to toggle the menu */
+        .toggle-btn {
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: none; /* Hide by default */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .left-menu, .right-panel {
+                flex: 1; /* Make sidebars proportional in smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-menu, .right-panel {
+                width: 100%; /* Sidebars take full width on small screens */
+                margin-bottom: 10px;
+            }
+
+            .main-content {
+                order: -1; /* Main content moves up */
+            }
+
+            .toggle-btn {
+                display: block; /* Show the toggle button on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        Responsive Webpage
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Left Menu -->
+        <div class="left-menu" id="leftMenu">
+            <button class="toggle-btn" onclick="toggleMenu()">Toggle Menu</button>
+            <h3>Navigation</h3>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Services</li>
+                <li>Contact</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="section" id="home">
+                <h2>Welcome</h2>
+                <p>This is a demo webpage designed with responsive and dynamic features.</p>
+            </div>
+
+            <div class="section" id="services">
+                <h2>Services</h2>
+                <p>We provide innovative solutions in web design and development.</p>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <h3>Contact Info</h3>
+            <p>Email: example@example.com</p>
+            <p>Phone: +1234567890</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        &copy; 2025 Responsive Webpage | All Rights Reserved
+    </div>
+
+    <!-- JavaScript to handle menu and screen resize -->
+    <script>
+        // Function to toggle the left menu visibility
+        function toggleMenu() {
+            const leftMenu = document.getElementById('leftMenu');
+            leftMenu.classList.toggle('collapsed');
+        }
+
+        // Function to shrink the page based on screen width
+        window.addEventListener('resize', function() {
+            let width = window.innerWidth;
+            let page = document.body;
+
+            if (width >= 992 && width <= 1600) {
+                page.style.transform = 'scale(0.9)';
+            } else if (width >= 700 && width <= 767) {
+                page.style.transform = 'scale(0.8)';
+            } else if (width >= 600 && width <= 700) {
+                page.style.transform = 'scale(0.75)';
+            } else if (width <= 600) {
+                page.style.transform = 'scale(0.5)';
+            } else {
+                page.style.transform = 'none'; // Reset scaling if no condition matches
+            }
+        });
+
+        // Call once to apply the initial scaling
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>
